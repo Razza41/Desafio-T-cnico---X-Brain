@@ -1,6 +1,7 @@
 package com.xbrain.pedidos.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class PedidoEntity {
             joinColumns  = @JoinColumn(name= "pedido_id")) //Cria um tabela auxiliar para lidar com a lista
     private List<ProdutoEntity> listaProdutos;
 
+    @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que 0!")
     @NotNull(message = "Valor total é obrigatório!")
     @Column (nullable = false)
     private BigDecimal valorTotal;

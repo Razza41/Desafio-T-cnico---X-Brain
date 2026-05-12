@@ -1,5 +1,6 @@
 package com.xbrain.pedidos.entity;
 
+import com.xbrain.pedidos.repository.PedidoRepository;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -19,6 +20,7 @@ private String cidade;
 
 @NotBlank (message = "CEP é obrigatório!")
 private String cep;
+
 
 
 
