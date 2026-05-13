@@ -1,12 +1,16 @@
 package com.xbrain.pedidos.service;
 
 import com.xbrain.pedidos.entity.PedidoEntity;
+import com.xbrain.pedidos.entity.ProdutoEntity;
+import com.xbrain.pedidos.messaging.PedidoProducer;
 import com.xbrain.pedidos.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -14,9 +18,22 @@ import java.util.List;
 public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
+    private final PedidoProducer  pedidoProducer;
 
     public PedidoEntity criarPedido(PedidoEntity novoPedido){
-       return pedidoRepository.save(novoPedido);
+
+        //Pega o valor de cada produto e soma
+        BigDecimal valorTotal = novoPedido.getListaProdutos()
+                .stream()
+                .map(ProdutoEntity::getPreco)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        novoPedido.setValorTotal(valorTotal);
+
+       PedidoEntity salvo = pedidoRepository.save(novoPedido);
+       pedidoProducer.publicar(salvo);
+
+       return salvo;
     }
 
     public List<PedidoEntity> listarTodos(){

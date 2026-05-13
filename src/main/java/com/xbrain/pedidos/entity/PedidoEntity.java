@@ -6,13 +6,14 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "pedidos")
-public class PedidoEntity {
+public class PedidoEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +29,7 @@ public class PedidoEntity {
             joinColumns  = @JoinColumn(name= "pedido_id")) //Cria um tabela auxiliar para lidar com a lista
     private List<ProdutoEntity> listaProdutos;
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que 0!")
-    @NotNull(message = "Valor total é obrigatório!")
+
     @Column (nullable = false)
     private BigDecimal valorTotal;
 

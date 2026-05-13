@@ -5,9 +5,11 @@ import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Embeddable
 @Data
-public class EnderecoEntity {
+public class EnderecoEntity{
 
 @NotBlank (message = "Rua é obrigatório!")
 private String rua;
