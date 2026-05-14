@@ -1,14 +1,15 @@
 package com.xbrain.pedidos.entity;
 
-import com.xbrain.pedidos.repository.PedidoRepository;
+
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-
-import java.io.Serializable;
+import lombok.*;
 
 @Embeddable
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class EnderecoEntity{
 
 @NotBlank (message = "Rua é obrigatório!")
