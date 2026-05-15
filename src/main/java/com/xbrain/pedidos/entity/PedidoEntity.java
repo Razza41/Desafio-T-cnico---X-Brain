@@ -27,11 +27,10 @@
                             private Integer codigoCliente;
 
 
-                            @ElementCollection
+                            @ElementCollection(fetch = FetchType.EAGER)
                             @CollectionTable(name = "produtos_pedido",
-                                    joinColumns  = @JoinColumn(name= "pedido_id")) //Cria um tabela auxiliar para lidar com a lista
+                                    joinColumns = @JoinColumn(name = "pedido_id"))
                             private List<ProdutoEntity> listaProdutos;
-
 
                             @Column (nullable = false)
                             private BigDecimal valorTotal;
