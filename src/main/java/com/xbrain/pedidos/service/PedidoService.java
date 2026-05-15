@@ -36,10 +36,12 @@ public class PedidoService {
        return salvo;
     }
 
+    //LISTA TODOS OS PEDIDOS
     public List<PedidoEntity> listarTodos(){
         return pedidoRepository.findAll();
     }
 
+    //LISTA PEDIDO POR ID
     public PedidoEntity buscarPorId(Long id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
